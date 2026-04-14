@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════════
+   Vaishno Hills Dairy — Official Brand Theme
+   Source: https://www.vaishnohillsdairy.co.in/
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Forest Greens */
+  --color-forest-900: #192e06;   /* body background */
+  --color-forest-600: #3e5926;   /* nav / button bg */
+  --color-forest-500: #3c5c1f;   /* primary heading green */
+
+  /* Gold / Yellow accents */
+  --color-gold-400: #f4b200;     /* primary gold */
+  --color-gold-500: #dbaf34;     /* gold heading variant */
+
+  /* Red hover */
+  --color-red:    #e92f2f;
+
+  /* Cream backgrounds */
+  --color-cream-1: #fbfaf3;      /* main content bg */
+  --color-cream-2: #f0efe7;      /* alternate section */
+  --color-cream-3: #ebe8da;      /* deeper alternate */
+  --color-header:  #fdfbea;      /* header background */
+
+  /* Semantic aliases */
+  --primary:    var(--color-forest-500);
+  --secondary:  var(--color-cream-1);
+  --accent:     var(--color-gold-400);
+  --gold:       var(--color-gold-400);
+  --dark:       #1a1a1a;
+}
+
+/* ── Global Resets ─────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream-1);
+  color: var(--dark);
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* ── Utility classes used across components ───────────────────── */
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-forest-500) 0%, var(--color-gold-400) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bg-brand-green {
+  background-color: var(--color-forest-600);
+}
+
+.bg-brand-gold {
+  background-color: var(--color-gold-400);
+}
+
+.bg-brand-cream {
+  background-color: var(--color-cream-1);
+}
+
+/* ── Hover-lift utility ───────────────────────────────────────── */
+.hover-lift {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px -4px rgba(60, 92, 31, 0.2);
+}
