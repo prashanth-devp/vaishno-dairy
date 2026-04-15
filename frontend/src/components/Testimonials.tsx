@@ -11,7 +11,8 @@ const testimonials = [
     feedback:
       "Vaishno Hills Dairy milk tastes pure and natural, just like traditional village milk. My family loves the freshness and quality.",
     rating: "4.8 / 5",
-    image: "/images/user1.jpg",
+    image:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face&q=80",
   },
   {
     name: "Anjali Sharma",
@@ -19,15 +20,17 @@ const testimonials = [
     feedback:
       "We trust Vaishno Hills Dairy for our daily milk needs. Knowing it is chemical-free gives complete peace of mind.",
     rating: "5 / 5",
-    image: "/images/user2.jpg",
+    image:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face&q=80",
   },
   {
     name: "Suresh Reddy",
     role: "Retail Partner",
     feedback:
-      "Consistent quality, ethical sourcing, and excellent service. Vaishno Hills Dairy stands out in today’s market.",
+      "Consistent quality, ethical sourcing, and excellent service. Vaishno Hills Dairy stands out in today's market.",
     rating: "4.9 / 5",
-    image: "/images/user3.jpg",
+    image:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face&q=80",
   },
 ];
 
@@ -45,12 +48,12 @@ export default function Testimonials() {
     <section className="relative h-[700px] overflow-hidden">
       {/* Background */}
       <Image
-        src="/images/testimonial-bg.jpg"
+        src="https://images.unsplash.com/photo-1594761051656-a42e4e63e2e6?w=1600&h=900&fit=crop&q=80"
         alt="Vaishno Hills Dairy Farm"
         fill
         className="object-cover"
       />
-      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 bg-[var(--color-forest-900)]/70" />
 
       {/* Content */}
       <div className="relative z-10 h-full flex items-center justify-center px-6">
@@ -62,7 +65,7 @@ export default function Testimonials() {
               alt="Customer"
               width={70}
               height={70}
-              className="absolute -left-10 top-1/2 -translate-y-1/2 rounded-xl border-4 border-white"
+              className="absolute -left-10 top-1/2 -translate-y-1/2 rounded-xl border-4 border-[var(--color-gold-400)] opacity-60"
             />
             <Image
               src={
@@ -73,7 +76,7 @@ export default function Testimonials() {
               alt="Customer"
               width={70}
               height={70}
-              className="absolute -right-10 top-1/2 -translate-y-1/2 rounded-xl border-4 border-white"
+              className="absolute -right-10 top-1/2 -translate-y-1/2 rounded-xl border-4 border-[var(--color-gold-400)] opacity-60"
             />
           </div>
 
@@ -83,27 +86,39 @@ export default function Testimonials() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}
-            className="bg-[#4a2f24] text-white rounded-xl px-10 py-12 text-center shadow-xl"
+            className="bg-[var(--color-forest-600)]/95 backdrop-blur-sm text-white rounded-xl px-10 py-12 text-center shadow-xl border border-[var(--color-gold-400)]/20"
           >
             {/* Quote */}
             <div className="flex justify-center mb-4">
-              <span className="h-12 w-12 rounded-full bg-yellow-400 text-[#4a2f24] flex items-center justify-center text-2xl font-bold">
-                “
+              <span className="h-12 w-12 rounded-full bg-[var(--color-gold-400)] text-[var(--color-forest-900)] flex items-center justify-center text-2xl font-bold">
+                &ldquo;
               </span>
             </div>
 
-            <h3 className="text-xl font-semibold mb-4">
+            <h3 className="text-xl font-semibold mb-4 text-[var(--color-gold-400)]">
               Trusted by Families Who Value Purity
             </h3>
 
-            <p className="text-sm leading-relaxed text-gray-200 max-w-2xl mx-auto">
+            <p className="text-sm leading-relaxed text-[var(--color-cream-1)] max-w-2xl mx-auto">
               {t.feedback}
             </p>
 
-            <div className="mt-6">
-              <p className="font-semibold">{t.name}</p>
-              <p className="text-sm text-gray-300">{t.role}</p>
-              <p className="mt-2 text-yellow-400 text-sm">⭐ {t.rating}</p>
+            {/* Avatar + Info */}
+            <div className="mt-6 flex flex-col items-center gap-3">
+              <Image
+                src={t.image}
+                alt={t.name}
+                width={56}
+                height={56}
+                className="rounded-full border-3 border-[var(--color-gold-400)] object-cover"
+              />
+              <div>
+                <p className="font-semibold text-white">{t.name}</p>
+                <p className="text-sm text-[var(--color-cream-2)]">{t.role}</p>
+                <p className="mt-2 text-[var(--color-gold-400)] text-sm">
+                  ⭐ {t.rating}
+                </p>
+              </div>
             </div>
           </motion.div>
 
@@ -111,29 +126,29 @@ export default function Testimonials() {
           <div className="absolute right-4 top-1/2 -translate-y-1/2 flex gap-2">
             <button
               onClick={prev}
-              className="h-10 w-10 rounded-full bg-white text-[#4a2f24] flex items-center justify-center hover:bg-yellow-400 transition"
+              className="h-10 w-10 rounded-full bg-[var(--color-gold-400)] text-[var(--color-forest-900)] flex items-center justify-center hover:bg-[var(--color-gold-500)] transition font-bold"
             >
               ←
             </button>
             <button
               onClick={next}
-              className="h-10 w-10 rounded-full bg-white text-[#4a2f24] flex items-center justify-center hover:bg-yellow-400 transition"
+              className="h-10 w-10 rounded-full bg-[var(--color-gold-400)] text-[var(--color-forest-900)] flex items-center justify-center hover:bg-[var(--color-gold-500)] transition font-bold"
             >
               →
             </button>
           </div>
 
           {/* Footer Trust Icons */}
-          <div className="mt-12 text-center text-yellow-400 text-sm">
-            Partners in sustainable & ethical dairy farming
+          <div className="mt-12 text-center text-[var(--color-gold-400)] text-sm font-medium">
+            Partners in sustainable &amp; ethical dairy farming
           </div>
 
-          <div className="mt-6 flex flex-wrap justify-center gap-8 text-white text-xs opacity-80">
-            <span>100% Pure Milk</span>
-            <span>Chemical Free</span>
-            <span>Ethical Farming</span>
-            <span>Farm Fresh</span>
-            <span>Quality Assured</span>
+          <div className="mt-6 flex flex-wrap justify-center gap-8 text-[var(--color-cream-1)] text-xs opacity-80">
+            <span>🥛 100% Pure Milk</span>
+            <span>🌿 Chemical Free</span>
+            <span>🐄 Ethical Farming</span>
+            <span>🌾 Farm Fresh</span>
+            <span>✅ Quality Assured</span>
           </div>
         </div>
       </div>

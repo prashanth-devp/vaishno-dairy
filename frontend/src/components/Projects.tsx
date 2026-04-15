@@ -7,27 +7,32 @@ const projects = [
   {
     category: "Farm Life",
     title: "Green Harvest Initiative",
-    image: "/images/projects/green-harvest.jpg",
+    image:
+      "https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=800&h=600&fit=crop&q=80",
   },
   {
     category: "Livestock",
     title: "Healthy Herd Program",
-    image: "/images/projects/healthy-herd.jpg",
+    image:
+      "https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?w=800&h=600&fit=crop&q=80",
   },
   {
     category: "Agro Tourism",
     title: "Farm Experience Retreat",
-    image: "/images/projects/farmstay.jpg",
+    image:
+      "https://images.unsplash.com/photo-1595855759920-86582396756a?w=800&h=600&fit=crop&q=80",
   },
   {
     category: "Milk & Produce",
     title: "Pure Dairy Products",
-    image: "/images/projects/pure-produce.jpg",
+    image:
+      "https://images.unsplash.com/photo-1628088062854-d1870b4553da?w=800&h=600&fit=crop&q=80",
   },
   {
     category: "Dairy Tech",
     title: "Smart Dairy Operations",
-    image: "/images/projects/dairy-tech.jpg",
+    image:
+      "https://images.unsplash.com/photo-1634141510639-d691d86f47be?w=800&h=600&fit=crop&q=80",
   },
 ];
 
