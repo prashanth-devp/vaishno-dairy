@@ -1,7 +1,9 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
 export default function Contact() {
   const ref = useRef(null);
@@ -13,11 +15,43 @@ export default function Contact() {
     company: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log(formData);
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch(`${API_URL}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setSubmitStatus({ type: "success", message: data.message });
+        setFormData({ name: "", email: "", phone: "", company: "", message: "" });
+      } else {
+        setSubmitStatus({
+          type: "error",
+          message: data.message || "Something went wrong. Please try again.",
+        });
+      }
+    } catch {
+      setSubmitStatus({
+        type: "error",
+        message: "Unable to connect to the server. Please try again later.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -233,13 +267,63 @@ export default function Contact() {
                 />
               </div>
 
+              {/* Status Message */}
+              <AnimatePresence>
+                {submitStatus && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className={`p-4 rounded-xl text-sm font-semibold ${
+                      submitStatus.type === "success"
+                        ? "bg-green-50 text-green-700 border-2 border-green-200"
+                        : "bg-red-50 text-red-700 border-2 border-red-200"
+                    }`}
+                  >
+                    <span className="mr-2">
+                      {submitStatus.type === "success" ? "✅" : "⚠️"}
+                    </span>
+                    {submitStatus.message}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
               <motion.button
                 type="submit"
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full px-8 py-4 rounded-xl bg-linear-to-r from-[#3e5926] to-[#3c5c1f] text-white font-bold text-lg shadow-xl shadow-[#3c5c1f]/30 hover:shadow-2xl transition-all"
+                disabled={isSubmitting}
+                whileHover={isSubmitting ? {} : { scale: 1.02, y: -2 }}
+                whileTap={isSubmitting ? {} : { scale: 0.98 }}
+                className={`w-full px-8 py-4 rounded-xl bg-linear-to-r from-[#3e5926] to-[#3c5c1f] text-white font-bold text-lg shadow-xl shadow-[#3c5c1f]/30 hover:shadow-2xl transition-all ${
+                  isSubmitting ? "opacity-70 cursor-not-allowed" : ""
+                }`}
               >
-                Send Message
+                {isSubmitting ? (
+                  <span className="flex items-center justify-center gap-3">
+                    <svg
+                      className="animate-spin h-5 w-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                      />
+                    </svg>
+                    Sending...
+                  </span>
+                ) : (
+                  "Send Message"
+                )}
               </motion.button>
             </form>
           </motion.div>
